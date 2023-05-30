@@ -14,12 +14,19 @@ function CartScreen() {
   
   const dispatch = useDispatch()
   const navigate = useNavigate();
-  const cart = useSelector(state=>state.cart)
+  const cart = useSelector((state)=>state.cart)
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   const {cartItems} = cart
 
   const checkoutHandler=()=>{
- 
-    navigate('/login?redirect=shipping')
+
+    if (!userInfo) {
+      navigate('/login')
+      } else {
+        navigate('/shipping')
+      }
   }
 
   useEffect(()=>{
